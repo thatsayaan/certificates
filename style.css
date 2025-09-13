@@ -6,7 +6,7 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #000; /* plain black background */
+  background-color: #000;
   color: #fff;
   min-height: 100vh;
 }
@@ -34,7 +34,7 @@ header p {
   max-width: 1500px;
   margin: 40px auto;
   padding: 15px;
-  background-color: #111; /* slightly lighter than body */
+  background-color: #111;
   border: 15px solid #444;
   border-radius: 15px;
   box-shadow: 0 12px 35px rgba(0,0,0,0.8);
@@ -42,61 +42,92 @@ header p {
 
 /* Masonry grid inside big frame */
 .wall {
-  column-count: 4;       /* number of columns */
-  column-gap: 15px;      /* gap between columns */
+  column-count: 4;           /* desktop */
+  column-gap: 25px;          /* space between columns */
+  padding: 10px;
 }
 
+/* Each frame */
 .frame {
   display: inline-block;
   width: 100%;
   background-color: #111;
   padding: 5px;
-  margin: 0 0 15px;
-  border: 5px solid #bfa76f; /* default border color */
+  margin: 0 0 25px;           /* vertical gap */
+  border: 5px solid #00e5ff;  /* default border color */
   border-radius: 6px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.6);
   overflow: hidden;
   transition: transform 0.3s, box-shadow 0.3s;
+  break-inside: avoid;        /* prevent overlapping */
+  -webkit-column-break-inside: avoid;
+  -moz-column-break-inside: avoid;
 }
 
 .frame:hover {
   transform: scale(1.05);
-  box-shadow: 0 8px 25px rgba(255,255,255,0.2);
+  box-shadow: 0 8px 25px rgba(255,255,255,0.3);
 }
 
 .frame img {
   width: 100%;
-  height: auto;               /* keep original aspect ratio */
+  height: auto;
   display: block;
   border-radius: 3px;
 }
 
-/* rotate elegant colors across frames */
-.wall .frame:nth-child(5n+1) {
-  border-color: #bfa76f; /* muted gold */
-}
-
-.wall .frame:nth-child(5n+2) {
-  border-color: #9fa8b4; /* muted silver/grey-blue */
-}
-
-.wall .frame:nth-child(5n+3) {
-  border-color: #a87060; /* muted copper/brown */
-}
-
-.wall .frame:nth-child(5n+4) {
-  border-color: #6f9a87; /* muted teal/green */
-}
-
-.wall .frame:nth-child(5n+5) {
-  border-color: #8a6fa8; /* muted purple */
-}
+/* Bright rotating border colors */
+.wall .frame:nth-child(5n+1) { border-color: #150af7; } /* cyan */
+.wall .frame:nth-child(5n+2) { border-color: #ecff40fd; } /* pink */
+.wall .frame:nth-child(5n+3) { border-color: #f90505; } /* yellow */
+.wall .frame:nth-child(5n+4) { border-color: #85f109; } /* mint */
+.wall .frame:nth-child(5n+5) { border-color: #a605f7; } /* purple */
 
 /* optional: tall and wide images still fill correctly */
-.frame.wide img {
+.frame.wide img,
+.frame.tall img {
   width: 100%;
 }
 
-.frame.tall img {
-  width: 100%;
+/* Responsive breakpoints */
+@media (max-width: 1200px) {
+  .wall {
+    column-count: 3;
+  }
+}
+
+@media (max-width: 800px) {
+  header h1 {
+    font-size: 2.3em;
+  }
+  header p {
+    font-size: 1em;
+  }
+  .wall {
+    column-count: 2;
+    column-gap: 20px;
+  }
+  .big-frame {
+    padding: 10px;
+    border-width: 10px;
+  }
+  .frame {
+    margin-bottom: 20px;
+    border-width: 4px;
+  }
+}
+
+@media (max-width: 500px) {
+  header h1 {
+    font-size: 2em;
+  }
+  .wall {
+    column-count: 1;
+    column-gap: 15px;
+  }
+  .frame {
+    margin-bottom: 15px;
+    border-width: 3px;
+  }
+
 }
